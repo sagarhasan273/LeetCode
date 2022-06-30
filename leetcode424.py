@@ -4,10 +4,11 @@ class Solution:
         for i in s:
             hashMap[i] = 0
         
-        l, r, res = 0, 0, 0
+        l, r, res, maxf = 0, 0, 0, 0
         while r < len(s):
             hashMap[s[r]] += 1
-            if (r-l + 1) - max(hashMap.values()) <= k:
+            maxf = max(maxf, hashMap[s[r]])
+            if (r-l + 1) - maxf <= k:
                 res = (r-l + 1)
                 r += 1
             else:
