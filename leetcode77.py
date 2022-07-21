@@ -15,4 +15,5 @@ class Solution:
             dfs(i+1, res)
         
         dfs(0, [])
+        
         return ans
