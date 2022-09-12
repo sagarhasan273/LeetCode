@@ -22,6 +22,30 @@ public:
 
 
 
+another solution:
+
+
+class Solution {
+public:
+    int minGroups(vector<vector<int>>& intervals) {
+        map<int, int> m;
+        int ans=0, count=0;
+        
+        for (auto& x: intervals){
+            m[x[0]]++;
+            m[x[1]+1]--;
+        }
+        
+        for(auto& x: m){
+            count += x.second;
+            ans = max(ans, count);
+        }
+        
+        return ans;
+    }
+};
+
+
 
 class Solution {
 public:
