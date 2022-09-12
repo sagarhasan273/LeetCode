@@ -21,3 +21,35 @@ public:
 };
 
 
+
+
+class Solution {
+public:
+    int minGroups(vector<vector<int>>& intervals) {
+        vector<int> starts, ends;
+        for(auto& x: intervals){
+            starts.push_back(x[0]);
+            ends.push_back(x[1]);
+        }
+        sort(starts.begin(), starts.end());
+        sort(ends.begin(), ends.end());
+
+        int i = 0, j = 0, count = 0, mx = 0;
+
+        while (i<starts.size() and j<=i){
+
+            if (starts[i] <= ends[j]){
+                count++;
+                i++;
+            }
+            else{
+                count--;
+                j++;
+            }
+            mx = max(mx, count);
+        }
+        return mx;
+    }
+};
+
+
