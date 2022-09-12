@@ -18,3 +18,42 @@ public:
 
     }
 };
+
+
+
+
+
+
+
+
+#include<map>
+
+class Solution {
+public:
+
+    int minMeetingRooms(vector<Interval> &intervals) {
+        vector<int> starts, ends;
+        for(auto& [f, s]: intervals){
+            starts.push_back(f);
+            ends.push_back(s);
+        }
+        sort(starts.begin(), starts.end());
+        sort(ends.begin(), ends.end());
+
+        int i = 0, j = 0, count = 0, mx = 0;
+
+        while (i<starts.size() and j<=i){
+            if (starts[i] < ends[j]){
+                count++;
+                i++;
+            }
+            else{
+                count--;
+                j++;
+            }
+            mx = max(mx, count);
+        }
+        return mx;
+
+    }
+};
