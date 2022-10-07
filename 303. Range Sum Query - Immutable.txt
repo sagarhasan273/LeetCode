@@ -1,0 +1,12 @@
+class NumArray {
+public:
+    vector<int> prefixSum;
+    NumArray(vector<int>& nums) {
+        prefixSum.push_back(0);
+        for (auto x: nums) prefixSum.push_back(prefixSum.back()+x); 
+    }
+    
+    int sumRange(int left, int right) {
+        return prefixSum[right+1] - prefixSum[left];
+    }
+};
