@@ -1,0 +1,27 @@
+Approch 01:
+
+class Trie {
+public:
+    Trie() {
+    }
+    unordered_map<string, int> map;
+    unordered_map<string, int> result;
+    
+    void insert(string word) {
+        string s = "";
+        for (int i = 0; i<word.size(); i++){
+            s += word[i];
+            map[s] = 1;
+        }
+        result[word] = 1;
+    }
+    
+    bool search(string word) {
+        return result[word];
+    }
+    
+    bool startsWith(string prefix) {
+        return map[prefix];
+    }
+};
+
