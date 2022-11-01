@@ -25,3 +25,25 @@ public:
     }
 };
 
+Python 3:
+
+class Trie:
+    def __init__(self):
+        self.result = {}
+        self.hmap = {}
+
+    def insert(self, word: str) -> None:
+        s = ""
+        for w in word:
+            s += w
+            self.hmap[s] = 1
+        self.result[word] = 1
+            
+
+    def search(self, word: str) -> bool:
+        return word in self.result
+
+    def startsWith(self, prefix: str) -> bool:
+        
+        return prefix in self.hmap
+
