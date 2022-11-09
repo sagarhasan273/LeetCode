@@ -1,0 +1,22 @@
+class Solution:
+    def largestOverlap(self, A: List[List[int]], B: List[List[int]]) -> int:
+        n, count = len(A), 0
+        
+        def shiftAndCount(x, y, M, R):
+            left = right = 0
+            for r_row, m_row in enumerate(range(y, n)):
+                for r_col, m_col in enumerate(range(x, n)):
+                    if M[m_row][m_col] == 1 and M[m_row][m_col] == R[r_row][r_col]:
+                        left += 1
+                    
+                    if M[m_row][r_col] == 1 and M[m_row][r_col] == R[r_row][m_col]:
+                        right += 1
+            
+            return max(left, right)
+        
+        for x in range(n):
+            for y in range(n):
+                count = max(count, shiftAndCount(x, y, A, B))
+                count = max(count, shiftAndCount(x, y, B, A))
+        
+        return count
