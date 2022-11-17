@@ -1,0 +1,34 @@
+Approch Without DSU tamplete:
+
+class Solution {
+public:
+    vector<int> parent;
+    int find(int x){
+        return parent[x] == x ? x : parent[x] = find(parent[x]);
+    }
+
+    
+    int removeStones(vector<vector<int>>& stones) {
+        int n = stones.size(), i = 0;
+        parent.resize(n);
+        
+        while (i < n) parent[i++] = i;
+        
+        for (int i = 0; i < n; i++){
+            for (int j = i+1; j < n; j++){
+                if (stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1]){
+                    int a = find(i);
+                    int b = find(j);
+                
+                    if (a != b) parent[b] = a;
+                }
+            }
+        }
+        
+        int numberOfSet = 0;
+        
+        for (int i = 0; i < n; i++) numberOfSet += parent[i] == i;
+        
+        return n - numberOfSet;
+    }
+};
