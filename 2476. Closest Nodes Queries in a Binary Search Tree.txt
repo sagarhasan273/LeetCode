@@ -1,0 +1,50 @@
+Python 03:
+
+class Solution:
+    def closestNodes(self, root: Optional[TreeNode], queries: List[int]) -> List[List[int]]:
+        answer = []
+        
+        def dfs(root):
+            if not root:
+                return
+            dfs(root.left)
+            answer.append(root.val)
+            dfs(root.right)
+        
+        dfs(root)
+        res = []
+
+        l = len(answer)
+        
+        for q in queries:
+            lo = 0
+            hi = l-1
+            flag = False
+            while hi - lo > 1:
+                mid = lo + (hi - lo) // 2
+                if answer[mid] < q:
+                    lo = mid
+                elif answer[mid] > q:
+                    hi = mid
+                else:
+                    flag = True
+                    break;
+
+            if flag:
+                res.append([q, q])
+            elif answer[0] > q:
+                res.append([-1, answer[0]])
+            elif answer[l-1] < q:
+                res.append([answer[l-1], -1])
+            elif answer[lo] == q:
+                res.append([answer[lo], answer[lo]])
+            elif answer[hi] == q:
+                res.append([answer[hi], answer[hi]])
+            else:
+                res.append([answer[lo], answer[hi]])
+        
+        return res
+
+
+C++ solution:
+
