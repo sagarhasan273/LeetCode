@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int distinctPrimeFactors(vector<int>& nums) {
+        unordered_set<int> res;
+        
+        for (auto n: nums){
+            int i = 2;
+            while (i <= n){
+                if (n%i == 0){
+                    n = (int)(n/i);
+                    res.insert(i);
+                }
+                else i++;
+            }
+        }
+        
+        return res.size();
+    }
+};
