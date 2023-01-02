@@ -1,0 +1,41 @@
+class Solution {
+public:
+    bool isPrime(int num){
+        if (num == 1){
+            return false;
+        }
+        int limits = floor(sqrt(num));
+        for (int divisor = 2; divisor <= limits; divisor++){
+            if (num % divisor == 0){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    vector<int> closestPrimes(int left, int right) {
+        vector<int> primes;
+
+        for(int candidate = left; candidate <= right; candidate++){
+            if (isPrime(candidate)){
+                if (primes.size() and primes.back() + 2 >= candidate){
+                    return {primes.back(), candidate};
+                }
+                primes.push_back(candidate);
+            }
+        }
+
+        vector<int> lowest = {-1, -1};
+        int gap = right - left + 1;
+
+        for (int i = 1; i < primes.size(); i++){
+            if (primes[i] - primes[i-1] < gap){
+                gap = primes[i] - primes[i-1];
+                lowest = {primes[i-1], primes[i]};
+            }
+        }
+
+        return lowest;
+    }
+};
