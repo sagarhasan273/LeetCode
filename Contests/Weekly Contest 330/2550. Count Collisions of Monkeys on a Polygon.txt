@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int moves(int n, long mod){
+        if (n == 0){
+            return 1;
+        }
+        long lower = moves(n/2, mod) % mod;
+        
+        return n & 1 ? lower * lower * 2 % mod : lower * lower % mod;
+    }
+    
+    int monkeyMove(int n) {
+        long mod = 1e9+7;
+        return (moves(n, mod)+mod-2) % mod;
+    }
+};
