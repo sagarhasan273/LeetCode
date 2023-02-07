@@ -1,0 +1,23 @@
+class Solution:
+    def maxCount(self, banned: List[int], n: int, maxSum: int) -> int:
+        res = []
+        cnt = [True] * (n+1)
+        for b in banned:
+            if b > n:
+                continue
+            cnt[b] = False
+            
+        for i in range(n+1):
+            res.append(i)
+        
+        count = 0
+        s = 0
+        for r in res[1:]:
+            if not cnt[r]:
+                continue
+            s += r
+            if s > maxSum:
+                return count
+            count += 1 
+        
+        return count

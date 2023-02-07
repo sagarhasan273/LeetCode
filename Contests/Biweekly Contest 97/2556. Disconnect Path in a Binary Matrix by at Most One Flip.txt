@@ -1,0 +1,23 @@
+class Solution:
+    def isPossibleToCutPath(self, grid: List[List[int]]) -> bool:
+        rows = len(grid)
+        cols = len(grid[0])
+        
+        def dfs(r, c):
+            if r+1 == rows and c+1 == cols:
+                return True
+            
+            if r >= rows or c >= cols or grid[r][c] == 0:
+                return False
+            
+            grid[r][c] = 0
+            return dfs(r+1, c) or dfs(r, c+1)
+        
+        if not dfs(0, 0):
+            return True
+        grid[0][0] = 1
+        
+        if dfs(0, 0):
+            return False
+        
+        return True

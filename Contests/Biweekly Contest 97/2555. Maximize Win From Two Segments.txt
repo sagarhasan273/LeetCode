@@ -1,0 +1,14 @@
+class Solution:
+    def maximizeWin(self, prizes: List[int], k: int) -> int:
+        dp = [0] * (len(prizes)+1)
+        j = res = 0
+        
+        for i, p in enumerate(prizes):
+            while p - prizes[j] > k:
+                j += 1
+            
+            dp[i+1] = max(dp[i], i-j+1)
+            res = max(res, i-j+1+dp[j])
+        
+        return res
+            
