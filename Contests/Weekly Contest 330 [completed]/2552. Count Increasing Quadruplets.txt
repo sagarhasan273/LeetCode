@@ -1,0 +1,15 @@
+class Solution:
+    def countQuadruplets(self, nums: List[int]) -> int:
+        n, res = len(nums), 0
+        ps = [0] * n
+
+        for j in range(n):
+            small = 0
+            for k in range(j):
+                if nums[k] < nums[j]:
+                    small += 1
+                    res += ps[k]
+                elif nums[k] > nums[j]:
+                    ps[k] += small
+        
+        return res
