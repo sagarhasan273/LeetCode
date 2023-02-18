@@ -1,0 +1,15 @@
+class Solution:
+    def minMaxDifference(self, num: int) -> int:
+        mx = 0
+        num = str(num)
+        
+        for i in range(len(num)):
+            temp = num
+            for j in range(len(num)):
+                d1 = num.replace(num[i], '9')
+                d2 = num.replace(num[j], '0')
+        
+                mx = max(mx, int(d1)-int(d2))
+            num = temp
+        
+        return mx

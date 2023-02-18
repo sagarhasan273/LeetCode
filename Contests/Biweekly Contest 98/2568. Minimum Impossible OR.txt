@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int minImpossibleOR(vector<int>& nums) {
+        int res = 1;
+        while (count(nums.begin(), nums.end(), res)){
+            res <<= 1;
+        }
+
+        return res;
+    }
+};
