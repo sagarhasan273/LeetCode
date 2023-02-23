@@ -1,0 +1,9 @@
+class Solution:
+    def minOperations(self, n: int) -> int:
+        res = 0
+
+        while n:
+            res += n & 1
+            n = n + 1 if n & 3 == 3 else n >> 1
+        
+        return res

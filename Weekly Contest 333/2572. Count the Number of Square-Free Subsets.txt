@@ -1,0 +1,31 @@
+class Solution:
+
+    def squareFreeSubsets(self, nums: List[int]) -> int:
+        sq = {4, 8, 9, 12, 16, 18, 20, 24, 25, 27, 28}
+        
+        def gcd(a, b):
+            while b != 0:
+                a, b = b, a%b
+            return a
+        
+        dic = {}
+
+        for n in nums:
+            if n in sq:
+                continue
+
+            temp_dic = dict(dic)
+            for k in dic.keys():
+                if gcd(n, k) == 1:
+                    cur = n*k
+                    if cur not in temp_dic:
+                        temp_dic[cur] = 0
+                    temp_dic[cur] += dic[k]
+                
+            if n not in temp_dic:
+                temp_dic[n] = 0
+            temp_dic[n] += 1
+
+            dic = temp_dic
+
+        return sum(dic.values()) % (10**9 + 7)

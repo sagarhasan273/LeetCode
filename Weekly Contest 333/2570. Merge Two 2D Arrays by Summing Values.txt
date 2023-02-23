@@ -1,0 +1,17 @@
+class Solution:
+    def mergeArrays(self, nums1: List[List[int]], nums2: List[List[int]]) -> List[List[int]]:
+        hmap = {}
+        
+        for i, n in nums1:
+            if i not in hmap:
+                hmap[i] = 0
+            hmap[i] = n
+        
+        for i, n in nums2:
+            if i not in hmap:
+                hmap[i] = 0
+            hmap[i] += n
+        
+        l = list(hmap.items())
+        l.sort(key = lambda x: x[0])
+        return l
