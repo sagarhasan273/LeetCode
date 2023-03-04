@@ -1,0 +1,16 @@
+class Solution:
+    def leftRigthDifference(self, nums: List[int]) -> List[int]:
+        rightSum = []
+        s = 0
+        for n in nums[::-1]:
+            rightSum.append(s)
+            s += n
+        rightSum = rightSum[::-1]
+
+        s = 0
+        res = []
+        for i, n in enumerate(nums):
+            res.append(abs(s-rightSum[i]))
+            s += n
+
+        return res

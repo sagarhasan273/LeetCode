@@ -1,0 +1,15 @@
+class Solution:
+    def divisibilityArray(self, word: str, m: int) -> List[int]:
+        num = 0
+        res = []
+        
+        for w in word:
+            num = num*10 + int(w)
+            if num%m == 0:
+                res.append(1)
+            else:
+                res.append(0)
+            
+            num %= m
+        
+        return res
