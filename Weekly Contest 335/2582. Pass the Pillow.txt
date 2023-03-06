@@ -1,0 +1,16 @@
+class Solution:
+    def passThePillow(self, n: int, time: int) -> int:
+        last = res = 1
+        for i in range(time):
+            if last:
+                res += 1
+            else:
+                res -= 1
+            
+            if res == n:
+                last = not last
+                
+            if res == 1:
+                last = not last
+                
+        return res

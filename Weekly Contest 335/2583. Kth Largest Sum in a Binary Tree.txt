@@ -1,0 +1,35 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def kthLargestLevelSum(self, root: Optional[TreeNode], k: int) -> int:
+        dp = [0]*(10**5+1)
+        pq = []
+        def dfs(node, depth):
+            if not node:
+                return
+            
+            dp[depth] += node.val
+            
+            dfs(node.left, depth+1)
+            dfs(node.right, depth+1)
+        
+        dfs(root, 0)
+        
+        for v in dp:
+            if v == 0:
+                continue
+                
+            heappush(pq, -v)
+            
+        res = -1
+        while k:
+            if not pq:
+                return -1
+            res = -heappop(pq)
+            k -= 1
+        
+        return res
