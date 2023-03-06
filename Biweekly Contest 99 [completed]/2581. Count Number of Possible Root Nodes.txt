@@ -1,0 +1,21 @@
+class Solution:
+    def rootCount(self, edges: List[List[int]], guesses: List[List[int]], k: int) -> int:
+        adj, hmap =defaultdict(set), Counter(map(tuple,guesses))
+        for i,j in edges:
+            adj[i].add(j)
+            adj[j].add(i)
+
+        @cache
+        def dfs(node, parent):
+            res = 0
+            for child in adj[node]-{parent}:
+                res += dfs(child, node)
+            return res + hmap[(parent, node)]
+        
+        res = 0
+
+        for i in adj:
+            if dfs(i, -1) >= k:
+                res += 1
+        
+        return res
