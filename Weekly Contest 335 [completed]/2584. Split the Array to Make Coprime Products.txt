@@ -1,0 +1,13 @@
+class Solution:
+    def findValidSplit(self, nums: List[int]) -> int:
+        n, left_prod, right_prod, streak = len(nums), nums[0], 1, 0
+
+        for i in range(1, n):
+            if gcd(left_prod, nums[i]) == 1:
+                streak += 1
+                right_prod *= nums[i]
+            else:
+                left_prod = left_prod * right_prod * nums[i]
+                streak, right_prod = 0, 1
+        
+        return n - streak - 1 if streak != 0 else -1

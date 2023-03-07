@@ -1,0 +1,19 @@
+class Solution:
+    def waysToReachTarget(self, target: int, types: List[List[int]]) -> int:
+        n = len(types)
+        @cache
+        def dfs(start, total):
+            if start == n or total >= target:
+                return total == target
+            res = 0
+            for i in range(types[start][0]):
+                next_total = total + types[start][1] * (i+1)
+
+                if i == 0:
+                    res += dfs(start+1, total)
+                res += dfs(start+1, next_total)
+            
+            return res
+        
+        return dfs(0, 0) % (10**9 + 7)
+        
