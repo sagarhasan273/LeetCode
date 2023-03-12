@@ -1,0 +1,9 @@
+class Solution:
+    def maxScore(self, nums: List[int]) -> int:
+        mx = prefix = 0
+        for n in sorted(nums)[::-1]:
+            prefix += n
+            if prefix > 0:
+                mx += 1
+        
+        return mx

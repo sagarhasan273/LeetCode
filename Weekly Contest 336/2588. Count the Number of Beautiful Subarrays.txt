@@ -1,0 +1,14 @@
+class Solution:
+    def beautifulSubarrays(self, nums: List[int]) -> int:
+        prefixOr, hmap = 0, {0: 1}
+        count = 0
+
+        for n in nums:
+            prefixOr ^= n
+            if prefixOr not in hmap:
+                hmap[prefixOr] = 0
+            
+            count += hmap[prefixOr]
+            hmap[prefixOr] += 1
+
+        return count
