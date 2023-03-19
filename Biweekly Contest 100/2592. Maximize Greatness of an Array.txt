@@ -1,0 +1,24 @@
+class Solution:
+    def maximizeGreatness(self, nums: List[int]) -> int:
+        counter = collections.Counter(nums)
+        res, l = 0, len(nums)
+        arr = [n for n in nums]
+        arr.sort()
+        
+        for n in nums:
+            index = bisect_right(arr, n)
+            value = arr[index] if index < l else -1
+            
+            while index < l and counter[value] == 0:
+                value = arr[index]
+                index += 1
+            
+            if index == l:
+                continue
+            
+            res += 1
+            if counter[value]:
+                counter[value] -= 1
+        
+        return res
+        
