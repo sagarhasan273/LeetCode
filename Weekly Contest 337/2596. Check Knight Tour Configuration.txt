@@ -1,0 +1,16 @@
+class Solution:
+    def checkValidGrid(self, grid: List[List[int]]) -> bool:
+        n = len(grid)
+
+        def dfs(i, j, v):
+            if i < 0 or i >= n or j < 0 or j >= n or grid[i][j] != 1+v:
+                return False
+            
+            if grid[i][j] == n*n-1:
+                return True
+            v = grid[i][j]
+            return dfs(i+2, j+1, v) or dfs(i+2, j-1, v) or dfs(i-2, j+1, v) or dfs(i-2, j-1, v) or dfs(i+1, j+2, v) or dfs(i-1, j+2, v) or dfs(i+1, j-2, v) or dfs(i-1, j-2, v)
+
+        
+        
+        return dfs(0, 0, -1)

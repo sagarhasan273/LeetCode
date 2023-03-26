@@ -1,0 +1,10 @@
+class Solution:
+    def evenOddBit(self, n: int) -> List[int]:
+        b = bin(n).replace('0b', '')[::-1]
+
+        res = [0, 0]
+        for i in range(len(b)):
+            if b[i] == '1':
+                res[i%2] += 1
+                
+        return res

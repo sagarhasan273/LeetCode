@@ -1,0 +1,14 @@
+class Solution:
+    def kItemsWithMaximumSum(self, numOnes: int, numZeros: int, numNegOnes: int, k: int) -> int:
+        res = []
+        for i in range(numOnes):
+            res.append(1)
+        
+        for i in range(numZeros):
+            res.append(0)
+        
+        for _ in range(numNegOnes):
+            res.append(-1)
+
+        return sum(res[:k])
+        
